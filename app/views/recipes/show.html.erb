@@ -1,9 +1,9 @@
 <p id="notice"><%= notice %></p>
 
-<p>
+<h2>
   <strong>Title:</strong>
   <%= @recipe.title %>
-</p>
+</h2>
 
 <p>
   <strong>Cooking time:</strong>
@@ -17,17 +17,17 @@
 
 <p>
   <strong>Food type:</strong>
-  <%= @recipe.food_type_id %>
+  <%= FoodType.find(@recipe.food_type_id).name %>
 </p>
 
 <p>
   <strong>Food preference:</strong>
-  <%= @recipe.food_preference_id %>
+  <%= FoodPreference.find(@recipe.food_preference_id).name %>
 </p>
 
 <p>
   <strong>Cuisine:</strong>
-  <%= @recipe.cuisine_id %>
+  <%= Cuisine.find(@recipe.cuisine_id).name %>
 </p>
 
 <p>
@@ -41,6 +41,6 @@
 </p>
 
 <% if user_signed_in? %>
-<%= link_to 'Edit', edit_recipe_path(@recipe) %> |
+<%= link_to 'Edit', edit_recipe_path(@recipe),class:"btn btn-success" %> 
 <% end -%>
-<%= link_to 'Back', recipes_path %>
+<%= link_to 'Back', recipes_path,class:"btn btn-default" %>

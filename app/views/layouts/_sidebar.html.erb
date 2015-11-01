@@ -1,8 +1,13 @@
+<%= form_tag recipes_path, method: 'get' do %>
+<%= submit_tag "Search", :name => nil , class:"btn btn-default"%></br>
+
 <div class="panel panel-primary" id="panels">
 	<div class="panel-heading">Food Preferences</div>
 	<div class="panel-body">
 	<% @food_preferences.each do |fp| %>
-		<p><%= fp.name%></p>
+		<!-- <p><%= fp.name%></p> -->		
+		<%= radio_button_tag :food_preference, fp.id %> 
+		<%= label_tag fp.name %></br>
 	<%end%>
 	</div>
 </div>
@@ -10,7 +15,9 @@
 	<div class="panel-heading">Food Types</div>
 		<div class="panel-body">
 	<% @food_types.each do |fp| %>
-		<p><%= fp.name%></p>
+		<!-- <p><%= fp.name%></p> -->
+		<%= radio_button_tag :food_type, fp.id %> 
+		<%= label_tag fp.name %></br>
 	<%end%>
 	</div>
 </div>
@@ -18,7 +25,19 @@
 	<div class="panel-heading">Cuisines</div>
 		<div class="panel-body">
 	<% @cuisines.each do |fp| %>
-		<p><%= fp.name%></p>
+		<!-- <p><%= fp.name%></p> -->
+		<%= radio_button_tag :cuisine, fp.id %> 
+		<%= label_tag fp.name %></br>
 	<%end%>
 	</div>
 </div>
+<div class="panel panel-primary" id="panels">
+	<div class="panel-heading">Difficulty Level</div>
+		<div class="panel-body">
+	<% Recipe::DIFFICULTY.each do |fp| %>
+		<%= radio_button_tag :difficulty, fp %> 
+		<%= label_tag fp %></br>
+	<%end%>
+	</div>
+</div>
+<% end -%>

@@ -7,8 +7,12 @@ html {
 
 body {
   padding-top: 60px;
+
 }
 
 section {
   overflow: auto;
+}
+.btn-primary:visited, .btn-success:visited, .btn-danger:visited{
+  color: white;
 }

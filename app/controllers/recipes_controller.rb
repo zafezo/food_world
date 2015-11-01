@@ -4,8 +4,13 @@ class RecipesController < ApplicationController
   # GET /recipes
   # GET /recipes.json
   def index
-    @recipes = Recipe.all
+    if search_params?
+      @recipes = Recipe.search(search_params).paginate(per_page:12, page: params[:page])  
+    else
+      @recipes = Recipe.all.paginate(per_page:8, page: params[:page]) 
+    end
   end
+
 
   # GET /recipes/1
   # GET /recipes/1.json
@@ -71,4 +76,16 @@ class RecipesController < ApplicationController
     def recipe_params
       params.require(:recipe).permit(:title, :cooking_time, :difficulty_level, :food_type_id, :food_preference_id, :cuisine_id, :ingredients, :procedure)
     end
+  def search_params?
+    params[:food_type] || params[:food_preference] || params[:cuisine] || params[:difficulty]
+  end
+
+  def search_params
+    query = {}
+    query[:food_type_id] = params[:food_type] if params[:food_type]
+    query[:food_preference_id] = params[:food_preference] if params[:food_preference]
+    query[:cuisine_id] = params[:cuisine] if params[:cuisine]
+    query[:difficulty_level] = params[:difficulty] if params[:difficulty]
+    return query
+  end
 end
